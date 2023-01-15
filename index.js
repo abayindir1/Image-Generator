@@ -4,6 +4,8 @@ const port = process.env.PORT || 4000
 
 const app =express()
 
+app.use("/openai", require("./routes/routes"))
+
 app.listen(port, ()=>{
     console.log("Server running on port " + port)
 })
