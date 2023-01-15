@@ -7,11 +7,22 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration)
 
 const generateImage = async(req, res) =>{
+    const{userPrompt, size}=req.body;
+    var imageSize
+
+    if (size == 'small') {
+        imageSize == "256x256"
+    } else if(size == 'medium'){
+        imageSize == '512x512'
+    }else{
+        imageSize == "1024x1024"
+    }
+
     try {
         const response = await openai.createImage({
-            prompt: "realistic lion",
+            prompt: userPrompt,
             n: 1,
-            size: "512x512"
+            size: imageSize
         });
         const imageURL = response.data.data[0].url
 
